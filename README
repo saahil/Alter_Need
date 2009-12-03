@@ -1,0 +1,1 @@
+This is an alternative to the existing U_Need model. It uses a native SQLite3 database to store data, rather than the existing twitter based storage model. To know more about U_Need and the idea, refer the original README on saahil/U_Need.git. Too lazy to write everything over again.

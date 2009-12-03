@@ -1,0 +1,21 @@
+{% block title %}Create an account with U_Need{% endblock %}
+
+{% block content %}
+	<h1>Create an account</h1>
+	<form action="." method="post">
+		{% if error %}
+			<p class="error">Oops! Just a few glitches below</p>
+			<p class="error">{{ error }}</p>
+		{% endif %}
+
+		<label for="username">Username: </label>
+		<input type="text" id="username" name="username"/>
+		<label type="pass1">Password: </label>
+		<input type="password" id="pass1" name="pass1"/>
+		<label for="pass2">Password(again): </label>
+		<input type="password" id="pass2" name="pass2"/>
+		<label for="email">Email: </label>
+		<input type="text" id="email" name="email"/>
+		<input type="submit" value="Create" />
+		</label>
+{% endblock %}

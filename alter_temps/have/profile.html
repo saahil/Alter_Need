@@ -1,0 +1,14 @@
+{% block content %}
+
+{% for i in list %}
+	<p>Item: {{ i }} </p>
+{% endfor %}
+
+<br/>
+Or add another item
+<form action="." method = "post">
+<label for="description">Description: </label>
+<input type="text" name="description" id="description"\>
+<input type="submit" value="Add"/>
+
+{% endblock %}
