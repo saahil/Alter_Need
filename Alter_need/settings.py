@@ -63,9 +63,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'Alter_Need.urls'
+ROOT_URLCONF = 'Alter_need.urls'
 
-TEMPLATE_DIRS = ("/media/Pitara/Programming/django/alter_temps"
+TEMPLATE_DIRS = ("/media/Pitara/Programming/django/Alter_Need/alter_temps"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -76,5 +76,5 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-	'Alter_Need.have',
+	'Alter_need.have',
 )
