@@ -3,12 +3,23 @@
 {% for i in list %}
 	<p>Item: {{ i }} </p>
 {% endfor %}
+<br/>
+{% for i in locs %}
+	<p>Location: {{ i }} </p>
+{% endfor %}
 
 <br/>
-Or add another item
-<form action="." method = "post">
+Add another item
+<form action="/accounts/profile/addItem/" method = "post">
 <label for="description">Description: </label>
-<input type="text" name="description" id="description"\>
+<input type="text" name="description" id="description"/>
 <input type="submit" value="Add"/>
-
+</form>
+<br/>
+Or add another location
+<form action="/accounts/profile/addLoc/" method="post">
+<label for="location">Location name: </label>
+<input type="text" name="location" id="location"/>
+<input type="submit" value="Add"/>
+</form>
 {% endblock %}
