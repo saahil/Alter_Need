@@ -8,7 +8,7 @@ from Alter_Need.have.views import profile, register, addLoc, addItem
 urlpatterns = patterns('',
 	(r'^have/', include('Alter_Need.have.urls')),
 	(r'^accounts/login/$', login),
-	(r'^accounts/logout/$', logout),
+	(r'^accounts/logout/$', logout, {'next_page': "/have/"}),
 	(r'^accounts/profile/$', profile),
 	(r'^accounts/login/register/$', register),
     (r'^accounts/profile/addLoc/$', addLoc),

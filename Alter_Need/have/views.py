@@ -6,12 +6,6 @@ from django.contrib.auth.decorators import login_required
 from Alter_Need.have.models import Item, Location
 from googlemaps import GoogleMaps
 
-def in_vic(lat1, lng1, lat2, lng2):
-	if (abs(lat1-lat2) <= 5) and (abs(lng1-lng2) <= 5):
-		return 1
-	else:
-		return 0
-
 def register(request):
 	error = ""
 	if (request.method == 'POST'):
@@ -33,9 +27,6 @@ def register(request):
 
 @login_required
 def profile(request): 
-	#if(request.method == "POST"):
-	#	item = Item(description=request.POST["description"], user_id=request.user.id)
-	#	item.save()
 	list = Item.objects.filter(user__exact=request.user.id)
 	locs = Location.objects.filter(user__exact=request.user.id)
 	return render_to_response("have/profile.html", {'list': list, 'locs': locs})
@@ -46,11 +37,11 @@ def addLoc(request):
 	lati, long = gmaps.address_to_latlng(request.POST['location'])
 	locn = Location(loc=request.POST['location'], lat=str(lati), lng=str(long), user_id=request.user.id)
 	locn.save()
-	return HttpResponse("Location added")
+	return HttpResponseRedirect("/have/")
 
 @login_required
 def addItem(request):
 	item = Item(description=request.POST["description"], user_id=request.user.id)
 	item.save()
-	return HttpResponse("Item added")
+	return HttpResponseRedirect("/have/")
 
