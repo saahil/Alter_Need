@@ -4,6 +4,9 @@ The keyword search function is present in the views.py of need app. This functio
 The documents present in the database are split into words. So is the keyword passed by the user. Now each word of the keyword is looked for in the document. Without the loss of generality, it can be assumed that the words of longer length carry greater weightage of relevance than those with shorter length(except in the case of abbreviations, which are short, but have high relevance. But this case is currently discarded). Hence the total weightage of each document in the database is computed against the keyword, but adding the weights of all the words of the keyword that are present in it. The largest weight, obviously, would be the sum of word lengths of all the words in the keyword itself. Once this is done, all the documents whose weights are non-zero are Insertion sorted on their weights and returned as response to the search request.
 
 Oh, and just realized that the keywords searching is case sensitive right now. Shall take care of that very soon too. 
+Edit:
+Made the search algorithm non case sensitive.
+
 Comments, suggestions and rebuttals are welcome.
 
 Saahil
