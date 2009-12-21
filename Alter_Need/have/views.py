@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from Alter_Need.have.models import Item, Location
 from googlemaps import GoogleMaps
+import string
 
 def register(request):
 	error = ""
@@ -35,13 +36,13 @@ def profile(request):
 def addLoc(request):
 	gmaps = GoogleMaps()
 	lati, long = gmaps.address_to_latlng(request.POST['location'])
-	locn = Location(loc=request.POST['location'], lat=str(lati), lng=str(long), user_id=request.user.id)
+	locn = Location(loc=string.lower(request.POST['location']), lat=str(lati), lng=str(long), user_id=request.user.id)
 	locn.save()
 	return HttpResponseRedirect("/have/")
 
 @login_required
 def addItem(request):
-	item = Item(description=request.POST["description"], user_id=request.user.id)
+	item = Item(description=string.lower(request.POST["description"]), user_id=request.user.id)
 	item.save()
 	return HttpResponseRedirect("/have/")
 

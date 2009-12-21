@@ -31,8 +31,7 @@ def search_sort(doc_list, key):
 				while (weight_of(found[i], key) < weight_of(cur, key)) and (i>=0):
 					found[i+1] = found[i]
 					i = i-1
-				found[i+1] = cur;
-	
+				found[i+1] = cur
 	return found
 
 def in_vic(lat1, lng1, lat2, lng2):
@@ -44,17 +43,20 @@ def in_vic(lat1, lng1, lat2, lng2):
 def lookup(request):
 	if (request.method == 'POST'):
 		gmaps = GoogleMaps()
-		latitude, longitude = gmaps.address_to_latlng(request.POST['where'])
 		locs = Location.objects.all()
 		close_by = []
 		for cur in locs:
 			cur_lat = cur.lat
 			cur_lng = cur.lng
-			if in_vic(float(cur_lat), float(cur_lng), latitude, longitude):
+			if (cur == string.lower(request.POST['where'])):
 				close_by.append(cur.user)
+			else:
+				latitude, longitude = gmaps.address_to_latlng(request.POST['where'])
+				if in_vic(float(cur_lat), float(cur_lng), latitude, longitude):
+					close_by.append(cur.user)
 
 		items = Item.objects.filter(user__in=close_by)
-		list = search_sort(items, request.POST['what'])
+		list = search_sort(items, string.lower(request.POST['what']))
 		return render_to_response("need/lookup.html", {"list": list})
 
 	return render_to_response("need/lookup.html")

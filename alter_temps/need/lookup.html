@@ -3,7 +3,9 @@
 
 <br/>
 {% for i in list %}
-	<p>Item: {{ i }} </p>
+	<br/>
+	<p><b>Item: {{ i.description }} </b></p>
+	<p>Owner: {{ i.user }} </p>
 {% endfor %}
 <br/>
 
@@ -16,4 +18,6 @@
 <input type="submit" value="Look for it"/>
 </form>
 
+<br/>
+<a href="/have/">Have something?</a>
 {% endblock %}
