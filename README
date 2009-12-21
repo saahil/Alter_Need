@@ -1,1 +1,9 @@
 This is an alternative to the existing U_Need model. It uses a native SQLite3 database to store data, rather than the existing twitter based storage model. To know more about U_Need and the idea, refer the original README on saahil/U_Need.git. Too lazy to write everything over again.
+
+The keyword search function is present in the views.py of need app. This function works as follows - 
+The documents present in the database are split into words. So is the keyword passed by the user. Now each word of the keyword is looked for in the document. Without the loss of generality, it can be assumed that the words of longer length carry greater weightage of relevance than those with shorter length(except in the case of abbreviations, which are short, but have high relevance. But this case is currently discarded). Hence the total weightage of each document in the database is computed against the keyword, but adding the weights of all the words of the keyword that are present in it. The largest weight, obviously, would be the sum of word lengths of all the words in the keyword itself. Once this is done, all the documents whose weights are non-zero are Insertion sorted on their weights and returned as response to the search request.
+
+Comments, suggestions and rebuttals are welcome.
+
+Saahil
+saahil.in@gmail.com
