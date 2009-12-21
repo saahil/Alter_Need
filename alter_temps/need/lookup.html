@@ -1,0 +1,19 @@
+{% block content %}
+<a href="/accounts/logout/">Logout</a>
+
+<br/>
+{% for i in list %}
+	<p>Item: {{ i }} </p>
+{% endfor %}
+<br/>
+
+<br/>
+<form action="." method="post">
+<label for="what">What? </label>
+<input type="text" name="what" id="what"/>
+<label for="where">Where? </label>
+<input type="text" name="where" id="where"/>
+<input type="submit" value="Look for it"/>
+</form>
+
+{% endblock %}
