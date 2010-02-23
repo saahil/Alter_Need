@@ -77,4 +77,5 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
 	'Alter_Need.have',
+	'Alter_Need.need',
 )

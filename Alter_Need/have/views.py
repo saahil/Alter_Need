@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from Alter_Need.have.models import Item, Location
-from googlemaps import GoogleMaps
+from geopy import geocoders
 import string
 
 def register(request):
@@ -34,9 +34,8 @@ def profile(request):
 
 @login_required
 def addLoc(request):
-	gmaps = GoogleMaps()
-	lati, long = gmaps.address_to_latlng(request.POST['location'])
-	locn = Location(loc=string.lower(request.POST['location']), lat=str(lati), lng=str(long), user_id=request.user.id)
+	place = string.lower(request.POST['location'])
+	locn = Location(loc=place, user_id=request.user.id)
 	locn.save()
 	return HttpResponseRedirect("/have/")
 

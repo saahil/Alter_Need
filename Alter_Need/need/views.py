@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from Alter_Need.have.models import Item, Location
-from googlemaps import GoogleMaps
+from geopy import geocoders, distance
 import string
 
 def weight_of(text, key):
@@ -34,26 +34,29 @@ def search_sort(doc_list, key):
 				found[i+1] = cur
 	return found
 
-def in_vic(lat1, lng1, lat2, lng2):
-	if (abs(lat1-lat2)<=5.0) and (abs(lng1-lng2)<=5.0):
-		return True
-	else:
-	 	return False
+#def in_vic(lat1, lng1, lat2, lng2):
+#	lat2 = float(lat2)
+#	lng2 = float(lng2)
+#	if (abs(lat1-lat2)<=5.0) and (abs(lng1-lng2)<=5.0):
+#		return True
+#	else:
+#	 	return False
 
 def lookup(request):
 	if (request.method == 'POST'):
-		gmaps = GoogleMaps()
+		gmaps = geocoders.Google()
 		locs = Location.objects.all()
 		close_by = []
+		markers = gmaps.geocode(request.POST['where'], exactly_one=False)
 		for cur in locs:
-			cur_lat = cur.lat
-			cur_lng = cur.lng
 			if (cur == string.lower(request.POST['where'])):
 				close_by.append(cur.user)
 			else:
-				latitude, longitude = gmaps.address_to_latlng(request.POST['where'])
-				if in_vic(float(cur_lat), float(cur_lng), latitude, longitude):
-					close_by.append(cur.user)
+				for _, cur_loc in gmaps.geocode(cur, exactly_one=False):
+					for _, marker in markers:
+						mile = distance.distance(marker, cur_loc).miles
+						if(mile <= 80):
+							close_by.append(cur.user)
 
 		items = Item.objects.filter(user__in=close_by)
 		list = search_sort(items, string.lower(request.POST['what']))

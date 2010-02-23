@@ -10,8 +10,6 @@ class Item(models.Model):
 
 class Location(models.Model):
 	loc = models.CharField(max_length=50)
-	lat = models.DecimalField(max_digits=20, decimal_places=15)
-	lng = models.DecimalField(max_digits=20, decimal_places=15)
 	user = models.ForeignKey(User)
 
 	def __str__(self):
