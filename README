@@ -1,4 +1,4 @@
-This is an alternative to the existing U_Need model. It uses a native SQLite3 database to store data, rather than the existing twitter based storage model. To know more about U_Need and the idea, refer the original README on saahil/U_Need.git. Too lazy to write everything over again.
+This is an alternative to the existing U_Need model. It uses a native SQLite3 database to store data, rather than the existing twitter based storage model. To know more about U_Need and the idea, refer the excerpt from the original README on saahil/U_Need.git below. Too lazy to write everything over again.
 
 The keyword search function is present in the views.py of need app. This function works as follows - 
 The documents present in the database are split into words. So is the keyword passed by the user. Now each word of the keyword is looked for in the document. Without the loss of generality, it can be assumed that the words of longer length carry greater weightage of relevance than those with shorter length(except in the case of abbreviations, which are short, but have high relevance. But this case is currently discarded). Hence the total weightage of each document in the database is computed against the keyword, but adding the weights of all the words of the keyword that are present in it. The largest weight, obviously, would be the sum of word lengths of all the words in the keyword itself. Once this is done, all the documents whose weights are non-zero are Insertion sorted on their weights and returned as response to the search request.
@@ -8,6 +8,19 @@ Edit:
 Made the search algorithm non case sensitive.
 
 Comments, suggestions and rebuttals are welcome.
+
+
+From U_Need/README:
+"
+U_Need is a user collaborative search listing service for products and services. The services are listed based on the location entered by the user. All the services within in the vicinity(defined based on latitude and longitude values calculated by the GoogleMaps API) are listed. 
+
+It is a fully Django based web-app with no models defined currently. This isdone because the classifieds are sent in a fixed format as a twitter reply to the account @U_Need. When a search is called, the replies are retrieved back from the twitter account and the locations and product descriptions are matched.
+
+To access the "mentions" to the above user handle, you need to enter the password in the file /need/views.py. The password field is left blank, and I would provide it if you ask me to, on saahil.in@gmail.com. Otherwise, you could change the user handle to something of your own and enter your own password.
+
+Its a barely working model of the application itself, and by no means complete. Till I rent out server space to store the listing, I intend to use Twitter entirely for storage purposes. The later versions would see a few models incorporated and database calls rather than Twitter API calls. 
+"
+
 
 Saahil
 saahil.in@gmail.com
